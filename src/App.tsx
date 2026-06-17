@@ -188,7 +188,16 @@ export default function App() {
 
   // Generate quiz endpoint fetcher
   const handleGenerateQuiz = async (paragraph: string, category?: string, questionCount?: number): Promise<void> => {
-    const response = await fetch("/api/gemini/quiz", {
+    let targetUrl = "/api/gemini/quiz";
+    const envApiUrl = (import.meta as any).env?.VITE_API_URL;
+    if (envApiUrl) {
+      targetUrl = `${envApiUrl.replace(/\/$/, "")}/api/gemini/quiz`;
+    } else if (window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
+      // Fallback to static deployment production api server url configured by user
+      targetUrl = "https://ai-voice-command-quiz-robot-1096346854517.asia-southeast1.run.app/api/gemini/quiz";
+    }
+
+    const response = await fetch(targetUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ paragraph, category, questionCount })
