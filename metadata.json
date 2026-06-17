@@ -1,0 +1,6 @@
+{
+  "name": "AI Voice Command Quiz Robot",
+  "description": "An interactive AI-powered voice quiz robot which generates quizzes from paragraphs, allows voice commands, plays audio questions, and tracks user improvement with detailed analytics.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
